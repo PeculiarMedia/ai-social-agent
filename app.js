@@ -15,17 +15,22 @@ function App() {
       .select("*")
       .order("id", { ascending: false });
     setLoading(false);
-    if (error) return console.error(error);
-    setPosts(data);
+    if (error) console.error(error);
+    else setPosts(data);
   }
 
   async function addPost() {
-    if (!newTitle.trim()) return alert("Enter a title first!");
+    if (!newTitle.trim()) return alert("Please enter a post title");
 
     const { error } = await supabase.from("test_posts").insert([{ title: newTitle }]);
-    if (error) return alert("Error adding post!");
-    setNewTitle("");
-    fetchPosts();
+    if (error) {
+      console.error(error);
+      alert("Error adding post — check Supabase policies!");
+    } else {
+      alert("Post added successfully!");
+      setNewTitle("");
+      fetchPosts();
+    }
   }
 
   React.useEffect(() => {
@@ -64,4 +69,3 @@ function App() {
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-
