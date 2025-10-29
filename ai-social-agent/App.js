@@ -1,6 +1,6 @@
 // Initialize Supabase
-const SUPABASE_URL = "https://YOUR_PROJECT_URL.supabase.co";
-const SUPABASE_KEY = "YOUR_ANON_PUBLIC_KEY";
+const SUPABASE_URL = "https://gksvudeydddtdclztzuq.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdrc3Z1ZGV5ZGRkdGRjbHp0enVxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE3MzkwNDcsImV4cCI6MjA3NzMxNTA0N30.TpIhZ0wN-dWL4Pp5g_mmnvYY4kwBq9uoxeWpCJ_oBzs";
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 function App() {
@@ -49,3 +49,4 @@ function App() {
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
