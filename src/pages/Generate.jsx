@@ -6,13 +6,14 @@ function Generate() {
   const [result, setResult] = useState(null)
 
   const handleGenerate = async () => {
-    const res = await generateContent(prompt, "test-user-001") // temporary ID
+    if (!prompt.trim()) return alert("Please enter a prompt.")
+    const res = await generateContent(prompt, "test-user-001")
     setResult(res)
   }
 
   return (
     <div style={{ padding: 20 }}>
-      <h1>AI Content Generator</h1>
+      <h2>AI Content Generator</h2>
       <input
         type="text"
         placeholder="Enter a topic..."
