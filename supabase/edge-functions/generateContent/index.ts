@@ -1,38 +1,19 @@
-// supabase/edge-functions/generateContent/index.ts
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
+import { createClient } from "https://esm.sh/@supabase/supabase-js"
 
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { createClient } from "https://esm.sh/@supabase/supabase-js";
-
-// connect to your Supabase project using env variables
-const supabase = createClient(
-  Deno.env.get("SUPABASE_URL")!,
-  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
-);
+const supabase = createClient(Deno.env.get("https://gksvudeydddtdclztzuq.supabase.co")!, Deno.env.get("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdrc3Z1ZGV5ZGRkdGRjbHp0enVxIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MTczOTA0NywiZXhwIjoyMDc3MzE1MDQ3fQ.LWtIA-0zMsl5T3YnDO-peXnKsau6Tic7L1hk1Pl2q4k")!)
 
 serve(async (req) => {
-  try {
-    const { prompt, user_id } = await req.json();
+  const { prompt } = await req.json()
 
-    // ✨ simple mock AI generation (replace later with real API)
-    const aiResponse = {
-      caption: `Here's an engaging caption about ${prompt}`,
-      hashtags: "#ai #socialmedia #creativity",
-      image_idea: `A visual representing ${prompt}`
-    };
-
-    // save the log in your ai_logs table
-    await supabase.from("ai_logs").insert([
-      { user_id, prompt, response: aiResponse }
-    ]);
-
-    // return the AI response
-    return new Response(JSON.stringify(aiResponse), {
-      headers: { "Content-Type": "application/json" },
-    });
-  } catch (error) {
-    return new Response(
-      JSON.stringify({ error: error.message }),
-      { status: 500, headers: { "Content-Type": "application/json" } }
-    );
+  // Example AI call placeholder
+  const aiResponse = {
+    caption: `Your perfect post about ${prompt}`,
+    hashtags: "#ai #socialmedia #innovation"
   }
-});
+
+  // Store result in DB
+  await supabase.from("ai_logs").insert([{ prompt, response: aiResponse }])
+
+  return new Response(JSON.stringify(aiResponse), { headers: { "Content-Type": "application/json" } })
+})
